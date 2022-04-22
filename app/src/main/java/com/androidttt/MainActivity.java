@@ -12,6 +12,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView pos[] = new ImageView[9];
     ImageView status;
     Symbol sideToMove;
+    Bitboard PlayerXBB;
+    Bitboard PlayerYBB;
+    Bitboard GameBB;
 
     enum Symbol
     {
@@ -72,7 +75,27 @@ public class MainActivity extends AppCompatActivity {
     /* Basic move */
     private void Move(int pos)
     {
+        Bitboard.Side side = Bitboard.idToSide(pos);
+
+        // Ignore move is square is already used
+        if (GameBB.isSideFree(side) == true)
+            return;
+
+        // Add move to GameBB
+        GameBB.Add(side);
+
+        // Add move to currently moving player
+        if (sideToMove == Symbol.X)
+        {
+            PlayerXBB.Add(side);
+        } else {
+            PlayerYBB.Add(side);
+        }
+
+        // Add symbol to the main view
         ChangeImage(GetSideToMove(), pos);
+
+        // Switch player
         SwitchSideToMove();
     }
 
@@ -172,5 +195,8 @@ public class MainActivity extends AppCompatActivity {
         // Initialize variables
         sideToMove = Symbol.X;
         status.setImageResource(R.drawable.x);
+        GameBB = new Bitboard();
+        PlayerXBB = new Bitboard();
+        PlayerYBB = new Bitboard();
     }
 }
