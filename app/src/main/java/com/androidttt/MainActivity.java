@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         running = true;
     }
 
+    /* Determine if current board is a winning one */
     private boolean CheckWinCondition()
     {
         if (PlayerXBB.IsWinning())
