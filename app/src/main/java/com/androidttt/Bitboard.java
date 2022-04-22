@@ -57,12 +57,12 @@ public class Bitboard {
     public Bitboard(Side side)
     {
         bitboard = sideToBb(side);
-    };
+    }
 
     public void Add(Side side)
     {
         bitboard += sideToBb(side);
-    };
+    }
 
     public boolean IsWinning()
     {
