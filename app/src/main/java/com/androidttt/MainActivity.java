@@ -10,6 +10,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     ImageView pos[] = new ImageView[9];
+    ImageView status;
     Symbol sideToMove;
 
     enum Symbol
@@ -76,8 +77,14 @@ public class MainActivity extends AppCompatActivity {
     private void SwitchSideToMove()
     {
         switch(sideToMove) {
-            case O: sideToMove = Symbol.X; break;
-            case X: sideToMove = Symbol.O; break;
+            case O:
+                sideToMove = Symbol.X;
+                status.setImageResource(R.drawable.x);
+                break;
+            case X:
+                sideToMove = Symbol.O;
+                status.setImageResource(R.drawable.o);
+                break;
         }
     }
 
@@ -147,9 +154,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize variables
-        sideToMove = Symbol.X;
-
         // Get positions
         pos[0] = findViewById(R.id.pos1);
         pos[1] = findViewById(R.id.pos2);
@@ -160,5 +164,10 @@ public class MainActivity extends AppCompatActivity {
         pos[5] = findViewById(R.id.pos6);
         pos[6] = findViewById(R.id.pos7);
         pos[8] = findViewById(R.id.pos9);
+        status = findViewById(R.id.statusIcon);
+
+        // Initialize variables
+        sideToMove = Symbol.X;
+        status.setImageResource(R.drawable.x);
     }
 }
