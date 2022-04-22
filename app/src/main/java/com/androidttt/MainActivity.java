@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Bitboard PlayerXBB;
     Bitboard PlayerYBB;
     Bitboard GameBB;
+    boolean running;
 
     enum Symbol
     {
@@ -73,11 +75,37 @@ public class MainActivity extends AppCompatActivity {
         GameBB.clear();
         PlayerXBB.clear();
         PlayerYBB.clear();
+        running = true;
+    }
+
+    private boolean CheckWinCondition()
+    {
+        if (PlayerXBB.IsWinning())
+        {
+            Toast.makeText(MainActivity.this,
+                    "Congratz! Player X Won!",
+                    Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (PlayerYBB.IsWinning())
+        {
+            Toast.makeText(MainActivity.this,
+                    "Congratz! Player O Won!",
+                    Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return false;
     }
 
     /* Basic move */
     private void Move(int pos)
     {
+        // Exit if game over
+        if (running == false)
+            return;
+
         Bitboard.Side side = Bitboard.idToSide(pos);
 
         // Ignore move is square is already used
@@ -97,6 +125,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Add symbol to the main view
         ChangeImage(GetSideToMove(), pos);
+
+        // Check if game over
+        if (CheckWinCondition())
+        {
+            running = false;
+            return;
+        }
 
         // Switch player
         SwitchSideToMove();
@@ -201,5 +236,6 @@ public class MainActivity extends AppCompatActivity {
         GameBB = new Bitboard();
         PlayerXBB = new Bitboard();
         PlayerYBB = new Bitboard();
+        running = true;
     }
 }
