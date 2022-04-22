@@ -96,4 +96,9 @@ public class Bitboard {
             default: return Side.MID_MID;
         }
     }
+
+    public void clear()
+    {
+        bitboard = 0;
+    }
 }

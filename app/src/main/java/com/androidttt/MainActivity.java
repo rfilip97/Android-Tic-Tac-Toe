@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
         sideToMove = Symbol.X;
         status.setImageResource(R.drawable.x);
+        GameBB.clear();
+        PlayerXBB.clear();
+        PlayerYBB.clear();
     }
 
     /* Basic move */
