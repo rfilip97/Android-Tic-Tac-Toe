@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         Log.i("MainActivity", "Entered Restart");
         for (int i = 0; i < 9; i++)
             GetPosByID(i).setAlpha(0.0f);
+
+        sideToMove = Symbol.X;
+        status.setImageResource(R.drawable.x);
     }
 
     /* Basic move */
