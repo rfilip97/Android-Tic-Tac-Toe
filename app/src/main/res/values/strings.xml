@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidTTT</string>
+    <string name="restart">Restart</string>
+    <string name="statusText">Currently moving: </string>
 </resources>
